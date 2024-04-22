@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Subscribers">
+        
+        
+        <div class="slds-card__body slds-card__body_inner">
+            <lightning-layout>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="text" value={filterValue} label="Filter This Table" placeholder="Name or Phone value ..." onchange={onChange} name="filter"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input type="checkbox"  label="Include Disconnected" checked={includeDisconnected}  onchange={onChange} name="include"></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <lightning-layout>
+                <lightning-datatable
+                    key-field="name"
+                    hide-checkbox-column
+                    columns={columns}
+                    data={tableData}
+                ></lightning-datatable>
+
+
+            </lightning-layout>
+
+        </div>
+        <div slot="footer">
+            <lightning-button-group>
+                <template if:true={hasPrevious}>
+                    <lightning-button label="Previous" onclick={handlePreviousClicked}></lightning-button>
+                </template>
+                <lightning-button label={currentPageNumber} disabled></lightning-button>
+                <template if:true={hasNext}>
+                    <lightning-button label="Next" onclick={handleNextClicked}></lightning-button>
+                </template>
+            </lightning-button-group>
+        </div>
+
+    </lightning-card>
+</template>
