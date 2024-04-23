@@ -3,12 +3,12 @@
         
         
         <div class="slds-card__body slds-card__body_inner">
-            <lightning-layout vertical-align="center">
+            <lightning-layout vertical-align="center" multiple-rows="true">
                 <lightning-layout-item size="6" padding="around-small">
                     <lightning-input type="text" value={filterValue} label="Filter This Table" placeholder="Name or Phone value ..." onchange={onChange} name="filter"></lightning-input>
                 </lightning-layout-item>
                 <lightning-layout-item size="6" padding="around-small">
-                    <lightning-input type="text" value={totalNumberOfRecords} label="Total Number of Records" placeholder="Name or Phone value ..." onchange={onChange} name="filter"></lightning-input>
+                    <lightning-input type="text" value={totalRecordCount} label="Total Number of Records" disabled></lightning-input>
                 </lightning-layout-item>
                 <lightning-layout-item size="4" padding="around-small">
                     <lightning-input type="checkbox"  label="Include Disconnected" checked={includeDisconnected}  onchange={onChange} name="include"></lightning-input>
