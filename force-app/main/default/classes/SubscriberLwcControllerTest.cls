@@ -11,9 +11,20 @@ public without sharing class SubscriberLwcControllerTest {
     static void testControllerGetData(){
         
         Test.startTest();
-        List<SubscriberLwcTableData> data = SubscriberEnhancedListLwcController.getAllSubscribers();
+        List<SubscriberLwcTableData> data = SubscriberEnhancedListLwcController.getAllSubscribers(false);
         Test.stopTest();
         System.assertEquals(10, data.size());
+        
+    }
+
+
+    @IsTest
+    static void testControllerGetDataException(){
+        
+        Test.startTest();
+        List<SubscriberLwcTableData> data = SubscriberEnhancedListLwcController.getAllSubscribers(true);
+        Test.stopTest();
+        
         
     }
 

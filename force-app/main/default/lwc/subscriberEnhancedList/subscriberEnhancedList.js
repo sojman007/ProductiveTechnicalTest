@@ -14,7 +14,7 @@ export default class SubscriberEnhancedList extends LightningElement {
     filterValue;
     filteredRecords =[];
 
-    @wire(getAllSubscribers)
+    @wire(getAllSubscribers,{throwException : false})
     handleRecordLoad({error,data}){
         if(error){
             const toast = new ShowToastEvent({
