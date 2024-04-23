@@ -1,12 +1,14 @@
 @suppressWarnings('pmd')
-public without sharing class LeadCalloutService  extends QueueableBaseLink{
+public without sharing class LeadCalloutService  extends QueueableBaseLink implements Database.AllowsCallouts{
     
     private List<Lead_Callout_Log__c> logs = new List<Lead_Callout_Log__c>();
     
 
     public LeadCalloutService(List<Lead> leads){
+        System.debug(leads.size() + ' leads enqueued for callout');
+        
         for(Lead lead : leads){
-            super.addNode(new LeadQueueableNode(lead));
+            super.addNode(new LeadQueueableNode(lead).setParent(this));
         }
     }
 
