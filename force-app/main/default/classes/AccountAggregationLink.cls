@@ -6,7 +6,7 @@ public with sharing class AccountAggregationLink extends QueueableBaseLink {
 
     public AccountAggregationLink(List<string> accountIds){
         for(string accountId :  accountIds){
-            super.addNode(new AccountQueueableNode(accountId));
+            super.addNode(new AccountQueueableNode(accountId).setParent(this));
         }
     }
 
@@ -15,6 +15,7 @@ public with sharing class AccountAggregationLink extends QueueableBaseLink {
     }
 
     public override void finish(){
+        system.debug(accountUpdateList);
         update accountUpdateList;
 
     }

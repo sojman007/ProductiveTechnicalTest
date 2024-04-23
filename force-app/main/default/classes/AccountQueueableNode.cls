@@ -9,9 +9,6 @@ public with sharing class AccountQueueableNode extends QueueableBaseNode {
 
     }
 
-    public override object get(){
-        return this.accountId;
-    }
     
 
     public override void execute(){

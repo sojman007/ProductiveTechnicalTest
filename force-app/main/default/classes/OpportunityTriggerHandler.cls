@@ -2,15 +2,18 @@ public with sharing class OpportunityTriggerHandler {
     
 
     private static void executeAccountAggregation(List<string> accountIds){
-        System.enqueueJob(new AccountAggregationLink(accountIds));
+        if(accountIds.size() > 0){
+            System.enqueueJob(new AccountAggregationLink(accountIds));
+        }
+
     }
 
     public static void handleOpportunities(List<Opportunity> records){
-        List<string> accountIds = new List<string>();
+        Set<string> accountIds = new Set<string>();
         for(Opportunity opp : records){
             accountIds.add(opp.AccountId);
         }
-        executeAccountAggregation(accountIds);
+        executeAccountAggregation(new List<String>(accountIds));
     }
 
 
