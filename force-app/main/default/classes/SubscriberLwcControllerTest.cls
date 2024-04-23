@@ -25,7 +25,7 @@ public without sharing class SubscriberLwcControllerTest {
             List<SubscriberLwcTableData> data = SubscriberEnhancedListLwcController.getAllSubscribers(true);
             Test.stopTest();
         }catch(Exception e){
-            System.assertEquals('IllegalArgumentException',e.getTypeName() );
+            System.assertEquals('System.AuraHandledException',e.getTypeName() );
         }
 
         
