@@ -1,8 +1,6 @@
 @isTest
 public without sharing class TestDataFactory {
-    public TestDataFactory() {
-
-    }
+   
 
     public static Account getTestAccount(){
         Account acc = new Account(Name='Test Account');
@@ -20,6 +18,7 @@ public without sharing class TestDataFactory {
             mylead.FirstName ='Test Lead ';
             mylead.LastName = String.valueOf(i);
             myLead.Bot_Script__c=testScript;
+            myLead.Company='Test Company' + i;
             myLead.Email ='TestLead'+i+'@testmaildomain.com';
             myLead.phone= '+123'+String.join(new List<Integer>{i,i,i,i,i,i,i,i,i,i},'');
             myLeads.add(myLead);
