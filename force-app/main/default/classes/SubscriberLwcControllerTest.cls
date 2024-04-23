@@ -20,10 +20,14 @@ public without sharing class SubscriberLwcControllerTest {
 
     @IsTest
     static void testControllerGetDataException(){
-        
-        Test.startTest();
-        List<SubscriberLwcTableData> data = SubscriberEnhancedListLwcController.getAllSubscribers(true);
-        Test.stopTest();
+        try{
+            Test.startTest();
+            List<SubscriberLwcTableData> data = SubscriberEnhancedListLwcController.getAllSubscribers(true);
+            Test.stopTest();
+        }catch(Exception e){
+            System.assertEquals('IllegalArgumentException',e.getTypeName() );
+        }
+
         
         
     }

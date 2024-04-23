@@ -28,7 +28,7 @@ public without sharing class SubscriberLwcTableData {
         phone = sub.Phone__c;
         status = sub.Status__c;
         dateJoined = sub.Date_Joined__c;
-        dataUsed = sub.Data_Used__c;
+        dataUsed = sub.Data_Used__c.setScale(2);
 
     }
 }
