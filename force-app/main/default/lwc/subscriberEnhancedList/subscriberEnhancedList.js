@@ -1,4 +1,4 @@
-import { LightningElement , wire } from 'lwc';
+import { LightningElement , wire , track} from 'lwc';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent'
 import getAllSubscribers from '@salesforce/apex/SubscriberEnhancedListLwcController.getAllSubscribers';
 const ITEMS_PER_PAGE = 10;
@@ -6,13 +6,16 @@ const ITEMS_PER_PAGE = 10;
 export default class SubscriberEnhancedList extends LightningElement {
 
 
+    @track
     recordData = []
 
     includeDisconnected = false;
     currentPage = 1;
 
     filterValue;
+    @track
     filteredRecords =[];
+    tableDatalength = 0;
 
     @wire(getAllSubscribers,{throwException : false})
     handleRecordLoad({error,data}){
@@ -24,7 +27,6 @@ export default class SubscriberEnhancedList extends LightningElement {
             this.dispatchEvent(toast);
 
         }else if(data){
-            console.log(data)
             if(data.length >0){
                 this.recordData = [...data]
             }else{
@@ -75,8 +77,9 @@ export default class SubscriberEnhancedList extends LightningElement {
         }
 
         if(tableData.length > 0){
-            this.filteredRecords =[...tableData]
-            // paginate
+            this.filteredRecords = [...tableData]
+            this.tableDatalength = this.filteredRecords.length;
+            
             return this.paginate(tableData, this.currentPage, ITEMS_PER_PAGE);
 
         }
@@ -86,9 +89,37 @@ export default class SubscriberEnhancedList extends LightningElement {
     }
 
     get totalRecordCount(){
-        return this.filteredRecords.length;
+        return this.tableDatalength.toString();
     }
 
+    get pageNumbers(){
+        if(this.filteredRecords){
+            const recordTotal = this.filteredRecords.length;
+            console.log('table data length : ' , recordTotal);
+            this.tableDatalength = recordTotal;
+            const totalPages = recordTotal  < ITEMS_PER_PAGE ? 1 :
+            //recordTotal % ITEMS_PER_PAGE > 0 ? Math.round((recordTotal / ITEMS_PER_PAGE) + 1)
+               Math.round(recordTotal / ITEMS_PER_PAGE);
+            console.log('total pages ' , totalPages);
+            return totalPages;
+        }
+
+    }
+
+    get currentPageNumber(){
+        return this.currentPage;
+    }
+    get hasPrevious(){
+        return (this.currentPage > 1 && (this.currentPage <= this.pageNumbers));
+    }
+
+    get hasNext(){
+        return this.currentPage < this.pageNumbers;
+        
+    }
+
+
+    
     paginate(data , pagenumber, pagesize){
         const startIndex = (pagenumber - 1) * pagesize;
         const endIndex = startIndex + pagesize;
@@ -110,24 +141,7 @@ export default class SubscriberEnhancedList extends LightningElement {
         }
     }
 
-    get pageNumbers(){
-        if(this.filteredRecords){
-            const recordTotal = this.filteredRecords.length;
-            console.log('table data length : ' , recordTotal);
-            const totalPages = recordTotal  < ITEMS_PER_PAGE ? 1 :
-            //recordTotal % ITEMS_PER_PAGE > 0 ? Math.round((recordTotal / ITEMS_PER_PAGE) + 1)
-               Math.round(recordTotal / ITEMS_PER_PAGE);
-            console.log('total pages ' , totalPages);
-            return totalPages;
-        }
-
-    }
-
-    get currentPageNumber(){
-        return this.currentPage;
-    }
-
-    
+   
     handleNextClicked(){
         if(this.currentPage < this.pageNumbers){
             this.currentPage += 1;
@@ -141,15 +155,7 @@ export default class SubscriberEnhancedList extends LightningElement {
 
     }
 
-    get hasPrevious(){
-        return (this.currentPage > 1 && (this.currentPage <= this.pageNumbers));
-    }
-
-    get hasNext(){
-        return this.currentPage < this.pageNumbers;
-        
-    }
-
+   
    
 
 }
