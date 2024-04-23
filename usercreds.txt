@@ -1,0 +1,15 @@
+
+=== User Description
+
+ key          label                                                                                                            
+ ──────────── ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+ Username     test-5phpavlxrzlt@example.com                                                                                    
+ Profile Name System Administrator                                                                                             
+ Profile Name System Administrator                                                                                             
+ Id           005JW0000075AcFYAU                                                                                               
+ Org Id       00DJW000003dwbu2AA                                                                                               
+ Access Token 00DJW000003dwbu!AQEAQNFX5abdQzeiPRKaOvh030nNsdvY0D2_O2CJWSHdRH0Yv4snyEmHx4zSC9Jxx8E.gduY8YTkwDTfaP5wC0fQT72UNRQ7 
+ Instance Url https://efficiency-agility-5885-dev-ed.scratch.my.salesforce.com                                                 
+ Login Url    https://efficiency-agility-5885-dev-ed.scratch.my.salesforce.com                                                 
+ Alias        productivescratch                                                                                                
+ Password     v%t1cNzukfssp                                                                                                    
