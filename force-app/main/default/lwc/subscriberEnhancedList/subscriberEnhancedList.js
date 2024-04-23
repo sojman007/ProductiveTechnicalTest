@@ -85,6 +85,9 @@ export default class SubscriberEnhancedList extends LightningElement {
         
     }
 
+    get totalRecordCount(){
+        return this.filteredRecords.length;
+    }
 
     paginate(data , pagenumber, pagesize){
         const startIndex = (pagenumber - 1) * pagesize;
