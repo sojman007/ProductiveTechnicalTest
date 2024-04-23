@@ -7,6 +7,7 @@ global without sharing class LogCalloutMock implements System.HttpCalloutMock {
         response.setHeader('Content-Type', 'application/json');
         response.setBody(request.getBody());
         response.setStatusCode(200);
+        response.setStatus('Success');
         return response;
     }
 }

@@ -20,6 +20,8 @@ public without sharing class OpportunityTriggerOperationTests {
         for(integer i =1; i <= 5 ; i++){
             Opportunity testOpp = new Opportunity();
             testOpp.Name ='Test Opp '+ i;
+            testOpp.StageName='Qualification';
+            testOpp.closeDate = Date.today().addDays(3);
             testOpp.amount = 50;
             totalAmount += testOpp.amount;
             testOpp.AccountId = acc.Id;

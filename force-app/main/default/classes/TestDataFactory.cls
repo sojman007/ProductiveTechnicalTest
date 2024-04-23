@@ -27,4 +27,23 @@ public without sharing class TestDataFactory {
         return myLeads;
 
     }
+
+    public static List<Subscriber__c> getTestSubscribers(integer amount){
+        List<Subscriber__c> subs = new List<Subscriber__c>();
+        for(integer i = 1; i <= amount ; i++){
+            Subscriber__c sub = new Subscriber__c();
+            sub.Name = 'Test Sub ' + i;
+            sub.Country__c = 'Nigeria';
+            sub.Email__c = 'testsub'+i+'@testemaildomain.com';
+            sub.Phone__c = '+234'+String.join(new List<Integer>{i,i,i,i,i,i,i,i,i,i}, '');
+            sub.Status__c = i  < 3 ?  'ACTIVE' : Math.mod(i, 2) == 0 ? 'SUSPENDED' : 'DISCONNECTED';
+            sub.Date_Joined__c = Date.today().addDays(i);
+            sub.Data_Used__c = Math.random() * 50 * i;
+            subs.add(sub);
+        }
+
+        return subs;
+
+
+    }
 }
